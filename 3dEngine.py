@@ -3,8 +3,9 @@
 #IMPORTATIONS
 
 import pygame
-
+from time import perf_counter
 import EngineMod
+import timeit
 
 #CONSTANTES
 
@@ -31,9 +32,21 @@ clock = pygame.time.Clock()
 
 #BOUCLE PRINCIPALE
 
+FPSTimes = [0, 1]
+deltaTime = [0,0,0,0]
+
 for frameCount in range(frames):
-    engine.Update()
+    
+    FPSTimes.append(perf_counter())
+    #print(t2 - t1)
+
+    deltaTime.append(int(1.0 / (FPSTimes[-1] - FPSTimes[-2])))
+    stableDTime = int((deltaTime[-1] + deltaTime[-2] + deltaTime[-3] + deltaTime[-4] + deltaTime[-5]) / 5)
+    #print("deltaTime = ", deltaTime[-1]) 
+     
+    engine.Update(stableDTime)
 
     clock.tick(fps)
+    #t2 = perf_counter()
 
 

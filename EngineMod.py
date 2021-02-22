@@ -23,7 +23,7 @@ class Engine:
         self.scene = SceneMod.Scene("scene1")
         self.scene.Load()
 
-    def Update(self):
+    def Update(self, deltaTime):
         
         self.renderer.Clear()
 
@@ -44,4 +44,4 @@ class Engine:
                 #self.renderer.Draw(face[2], face[0])
                 
         self.frameCount += 1
-        self.renderer.Show()
+        self.renderer.Show(deltaTime)

@@ -5,6 +5,7 @@
 import pygame
 import pygame.gfxdraw
 from pygame.locals import *
+#import pygame.freetype
 
 import AlgoMod
 
@@ -22,6 +23,7 @@ class Renderer:
 
         self.fenetre = pygame.display.set_mode((self.longueur, (self.largeur)))
         self.fonte = pygame.font.SysFont("arial", 30)
+        self.FPSFont = pygame.font.SysFont("arial", 30)
 
     def Init(self):
         
@@ -55,7 +57,16 @@ class Renderer:
 
         #print(point1[0], point1[1], point2[0], point2[1])
     
-    def Show(self):
+    def Show(self, deltaTime):
+
+        #FPS COUNTER
+        FPSRect = pygame.Rect(0, 0, 135, 35)
+        pygame.draw.rect(self.fenetre, (0, 0, 0, 125), FPSRect, width=0)
+        FPSText = "FPS : " + str(deltaTime)
+        FPSSurface = self.FPSFont.render(FPSText, True, (255, 255, 0, 0))
+        self.fenetre.blit(FPSSurface, (0,0))
+
+        #print("hexxxx")
 
         #pygame.draw.line(self.fenetre, (0,255,0), (0,0), (1400, 700))
         pygame.display.flip()
