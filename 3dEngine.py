@@ -39,7 +39,7 @@ for frameCount in range(frames):
     
     FPSTimes.append(perf_counter())
     #print(t2 - t1)
-
+    #hexxxx
     deltaTime.append(int(1.0 / (FPSTimes[-1] - FPSTimes[-2])))
     stableDTime = int((deltaTime[-1] + deltaTime[-2] + deltaTime[-3] + deltaTime[-4] + deltaTime[-5]) / 5)
     #print("deltaTime = ", deltaTime[-1]) 

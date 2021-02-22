@@ -66,8 +66,6 @@ class Renderer:
         FPSSurface = self.FPSFont.render(FPSText, True, (255, 255, 0, 0))
         self.fenetre.blit(FPSSurface, (0,0))
 
-        #print("hexxxx")
-
         #pygame.draw.line(self.fenetre, (0,255,0), (0,0), (1400, 700))
         pygame.display.flip()
         #print("we done")

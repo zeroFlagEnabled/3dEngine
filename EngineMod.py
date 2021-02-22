@@ -34,7 +34,7 @@ class Engine:
 
             #print(geometry)
             #print("drawing")
-
+            #naureist
             for i in range(len(geometry)):
                 #print(face)
                 #print("g : " + str(geometry[i]))
