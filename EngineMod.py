@@ -5,6 +5,7 @@
 import RenderMod
 import SceneMod
 import MatrixMod
+import pygame
 
 #Classes
 
@@ -23,18 +24,28 @@ class Engine:
         self.scene = SceneMod.Scene("scene1")
         self.scene.Load()
 
-    def Update(self, deltaTime):
+    def Update(self, deltaTime, stableDTime):
+
+        exitCode = True
         
         self.renderer.Clear()
 
-        self.scene.Update()
+        inputList = []
+
+        for event in pygame.event.get():
+                    if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+                        pygame.quit()
+                        exitCode = False
+                    if event.type == pygame.KEYDOWN:
+                        inputList.append(chr(event.key))
+
+        self.scene.Update(deltaTime, inputList)
         
         for obj in self.scene.objs:
-            geometry, luminance = obj.getViewSpaceGeometry(self.projSettings)
+            geometry, luminance = obj.getViewSpaceGeometry(self.projSettings, self.scene.camera)
 
             #print(geometry)
             #print("drawing")
-            #naureist
             for i in range(len(geometry)):
                 #print(face)
                 #print("g : " + str(geometry[i]))
@@ -44,4 +55,6 @@ class Engine:
                 #self.renderer.Draw(face[2], face[0])
                 
         self.frameCount += 1
-        self.renderer.Show(deltaTime)
+        self.renderer.Show(stableDTime)
+
+        return exitCode

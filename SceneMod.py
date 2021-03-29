@@ -8,8 +8,15 @@ import ObjectMod
 
 #Classes
 
+class Camera:
+    def __init__(self):
+        self.vec = [0,0,0]
+        self.lookDirVec = [0,0,1]
+
 class Scene:
     def __init__(self, directory):
+
+        self.camera = Camera()
         
         self.directory = directory
 
@@ -98,7 +105,17 @@ class Scene:
     def Unload(self):
         pass
 
-    def Update(self):
+    def Update(self, deltaTime, inputList):
+
+        # TOUCHES EN BÉPO PARCE QUE C'EST QUAND MÊME PLUS SIMPLE
+        for key in inputList:
+            if key == 'b':
+                self.camera.vec[1] += 8.0 * deltaTime
+            if key == 'p':
+                self.camera.vec[1] -= 8.0 * deltaTime
+        print(self.camera.vec[1])
+        #self.camera.vec[1] += 1
+
         self.objs[0].Update([0,0,0], [0,0.5,0], [0,0,0])
         #self.objs[1].Update([0,0,0], [0,0.5,0], [0,0,0])
         #self.objs[2].Update([0,0,0], [0,0.5,0], [0,0,0])
