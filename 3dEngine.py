@@ -33,18 +33,22 @@ clock = pygame.time.Clock()
 #BOUCLE PRINCIPALE
 
 FPSTimes = [0, 1]
-deltaTime = [0,0,0,0]
+timeTable = [0,0,0,0]
 
-for frameCount in range(frames):
+while True:
+#for frameCount in range(frames):
     
     FPSTimes.append(perf_counter())
     #print(t2 - t1)
-    #hexxxx
-    deltaTime.append(int(1.0 / (FPSTimes[-1] - FPSTimes[-2])))
-    stableDTime = int((deltaTime[-1] + deltaTime[-2] + deltaTime[-3] + deltaTime[-4] + deltaTime[-5]) / 5)
+    deltaTime = FPSTimes[-1] - FPSTimes[-2]
+    timeTable.append(int(1.0 / (FPSTimes[-1] - FPSTimes[-2])))
+    stableDTime = int((timeTable[-1] + timeTable[-2] + timeTable[-3] + timeTable[-4] + timeTable[-5]) / 5)
     #print("deltaTime = ", deltaTime[-1]) 
      
-    engine.Update(stableDTime)
+    exitCode = engine.Update(deltaTime, stableDTime)
+
+    if not exitCode :
+            break
 
     clock.tick(fps)
     #t2 = perf_counter()

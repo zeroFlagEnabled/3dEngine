@@ -25,7 +25,7 @@ def CalculateNormal(vector1, vector2):
 
     return normal
     
-def RenderInfo(vertexList):
+def RenderInfo(vertexList, camera):
 
     #print(vertexList)
     
@@ -37,7 +37,8 @@ def RenderInfo(vertexList):
     #vector1 = np.array([vertexList[1][0] - vertexList[2][0], vertexList[1][1] - vertexList[2][1], vertexList[1][2] - vertexList[2][2]])
     #vector2 = np.array([vertexList[0][0] - vertexList[1][0], vertexList[0][1] - vertexList[1][1], vertexList[0][2] - vertexList[1][2]])
     
-    castingVector = np.array(vertexList[0]) #needs to be changed when camera moves
+    #castingVector = np.array(vertexList[0]) - np.array(camera.vec)
+    castingVector = np.array(vertexList[0])
     lightingVector = Normalize(np.array([0,0,1]))
     #lightingVector = np.array([0,0,1])
     normal = CalculateNormal(vector1, vector2)
